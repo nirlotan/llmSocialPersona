@@ -1,0 +1,8 @@
+langchain_community
+langchain_core
+langchain_openai
+pandas
+streamlit
+streamlit_antd_components
+streamlit_extras
+streamlit_shadcn_ui
