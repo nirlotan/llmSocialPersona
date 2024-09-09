@@ -11,15 +11,20 @@ from streamlit_extras.bottom_container import bottom
 import streamlit_shadcn_ui as ui
 from streamlit_extras.switch_page_button import switch_page
 import streamlit_antd_components as sac
+from streamlit_javascript import st_javascript
+from user_agents import parse
 
 st.set_page_config(page_title="≋SøcialPersonaCore★", page_icon="🗣️", layout="wide")
-
 
 if "selected_user" not in st.session_state:
     switch_page('main')
 if "previous_user" not in st.session_state:
     st.session_state['previous_user'] = st.session_state['selected_user']
 
+# check user agent to suppress non-mandatory parts when running on mobile
+ua_string = st_javascript("""window.navigator.userAgent;""")
+user_agent = parse(ua_string)
+st.session_state.is_session_pc = user_agent.is_pc
 
 # Set up memory
 msgs = StreamlitChatMessageHistory(key="langchain_messages")
@@ -40,11 +45,9 @@ if st.session_state['selected_user'] != st.session_state['previous_user']:
     msgs.clear()
     st.session_state['previous_user'] = st.session_state['selected_user']
 
-
 selected_user = st.session_state['selected_user']
 selected_user_data = st.session_state['selected_user_data']
 image = selected_user_data["image"]
-
 
 title_cols = st.columns([5,2])
 with title_cols[0]:
@@ -60,16 +63,16 @@ with title_cols[0]:
 
     use_self_description = ui.switch(default_checked=True, label="Use user's self description")
 
-with title_cols[1].container(border=True):
-    container_cols = st.columns([1, 4], vertical_alignment='center')
-    st.write(selected_user_data['description'])
-    container_cols[0].markdown(f'<img src="{image}" alt="My Image" width="50" height="50" style="border-radius: 50%;">',
-                               unsafe_allow_html=True)
-    container_cols[1].markdown(f"#### {selected_user_data['screen_name']}")
+if st.session_state.is_session_pc:
+    with title_cols[1].container(border=True):
+        container_cols = st.columns([1, 4], vertical_alignment='center')
+        st.write(selected_user_data['description'])
+        container_cols[0].markdown(f'<img src="{image}" alt="My Image" width="50" height="50" style="border-radius: 50%;">',
+                                   unsafe_allow_html=True)
+        container_cols[1].markdown(f"#### {selected_user_data['screen_name']}")
 
-    with st.expander("SocialVec profile insights", expanded=False):
-        st.markdown(body=selected_user_data['persona_description'])
-
+        with st.expander("SocialVec profile insights", expanded=False):
+            st.markdown(body=selected_user_data['persona_description'])
 
 openai_api_key = st.secrets["openai_api_key"]
 
@@ -120,13 +123,14 @@ with bottom():
 
     user_prompt = bottom_columns[0].chat_input()
 
-    with bottom_columns[1]:
-        btn = sac.buttons(
-            items=["Hi! How are you doing?", "Hi! Who are you?", "What are you up to?",
-                                        "What are your plans for today?", "Tell me more about yourself", "What are your hobbies?"],
-            label = 'Suggested Messages', index=0, align = 'center', size = 'xs', key="asvv1")
+    if st.session_state.is_session_pc:
+        with bottom_columns[1]:
+            btn = sac.buttons(
+                items=["Hi! How are you doing?", "Hi! Who are you?", "What are you up to?",
+                                            "What are your plans for today?", "Tell me more about yourself", "What are your hobbies?"],
+                label = 'Suggested Messages', index=0, align = 'center', size = 'xs', key="asvv1")
 
-        st.write(btn)
+            st.write(btn)
 
 with st.container():
     if user_prompt:

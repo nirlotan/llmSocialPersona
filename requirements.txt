@@ -7,3 +7,7 @@ streamlit_antd_components
 streamlit_extras
 streamlit_shadcn_ui
 openpyxl
+streamlit-javascript
+pyyaml
+ua-parser
+user-agents
