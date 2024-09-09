@@ -21,10 +21,13 @@ if "selected_user" not in st.session_state:
 if "previous_user" not in st.session_state:
     st.session_state['previous_user'] = st.session_state['selected_user']
 
-# check user agent to suppress non-mandatory parts when running on mobile
-ua_string = st_javascript("""window.navigator.userAgent;""")
-user_agent = parse(ua_string)
-st.session_state.is_session_pc = user_agent.is_pc
+try:
+    # check user agent to suppress non-mandatory parts when running on mobile
+    ua_string = st_javascript("""window.navigator.userAgent;""")
+    user_agent = parse(ua_string)
+    st.session_state.is_session_pc = user_agent.is_pc
+except:
+    st.session_state.is_session_pc = True
 
 # Set up memory
 msgs = StreamlitChatMessageHistory(key="langchain_messages")
