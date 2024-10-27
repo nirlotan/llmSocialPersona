@@ -11,3 +11,4 @@ streamlit-javascript
 pyyaml
 ua-parser
 user-agents
+st_pages
