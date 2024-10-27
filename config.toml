@@ -1,4 +1,4 @@
 # config.toml
 minimal_number_of_messages = 2
 max_interests_pc = 6
-max_interests_mobile = 3
+max_interests_mobile = 2
