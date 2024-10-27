@@ -168,7 +168,7 @@ with st.container():
 if not disable_feedback and (next_button or wizard_step2 == "Feedback" or wizard_step1 == "Feedback"):
     st.session_state['reset_coversation'] = True
     st.session_state['chat_messages'] = msgs.messages
-    st.switch_page('pages/submit_feedback.py')
+    st.switch_page('app_pages/submit_feedback.py')
 elif wizard_step2 == "Profiling" or wizard_step1 == "Profiling":
     st.session_state['reset_coversation'] = True
-    st.switch_page('pages/set_profile.py')
+    st.switch_page('app_pages/set_profile.py')

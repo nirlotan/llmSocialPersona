@@ -184,5 +184,5 @@ wizard_step2 = sac.steps(
 
 if next_button or wizard_step2 == "Chat" or wizard_step1 == "Chat":
     st.session_state['reset_coversation'] = True
-    st.switch_page('pages/slim_chat.py')
+    st.switch_page('app_pages/slim_chat.py')
 

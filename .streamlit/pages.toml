@@ -1,14 +1,14 @@
 [[pages]]
-path = "pages/set_profile.py"
+path = "app_pages/set_profile.py"
 name = "Start"
 icon = "👤"
 
 [[pages]]
-path = "pages/slim_chat.py"
+path = "app_pages/slim_chat.py"
 name = "Chat"
 icon = "💬"
 
 [[pages]]
-path = "pages/submit_feedback.py"
+path = "app_pages/submit_feedback.py"
 name = "Feedback"
 icon = "🤔"

@@ -25,10 +25,10 @@ wizard_step1 = sac.steps(
 
 if wizard_step1 == "Chat":
     st.session_state['reset_coversation'] = True
-    st.switch_page('pages/slim_chat.py')
+    st.switch_page('app_pages/slim_chat.py')
 elif wizard_step1 == "Profiling":
     st.session_state['reset_coversation'] = True
-    st.switch_page('pages/set_profile.py')
+    st.switch_page('app_pages/set_profile.py')
 
 
 rate1 = sac.rate(label='Engaging3', description="How engaging was the converation?", value=0.0, align='start',key="asd1")
