@@ -3,7 +3,6 @@ from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
 from langchain_core.runnables.history import RunnableWithMessageHistory
 from langchain_openai import ChatOpenAI
 
-
 import streamlit as st
 import pandas as pd
 import os
@@ -15,6 +14,7 @@ from streamlit_javascript import st_javascript
 from user_agents import parse
 
 st.set_page_config(page_title="≋SøcialPersonaCore★", page_icon="🗣️", layout="wide")
+
 
 if "selected_user" not in st.session_state:
     switch_page('main')
