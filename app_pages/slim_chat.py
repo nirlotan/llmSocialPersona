@@ -118,13 +118,15 @@ with bottom():
         user_prompt = user_text if user_text else selected_message
         user_text = None
 
-    wizard_step2 = sac.steps(
-        items=[
-            sac.StepsItem(title='Profiling'),
-            sac.StepsItem(title='Chat'),
-            sac.StepsItem(title='Feedback', disabled=disable_feedback),
-        ], index=1, key="wiz2"
-    )
+    if st.session_state.is_session_pc:
+
+        wizard_step2 = sac.steps(
+            items=[
+                sac.StepsItem(title='Profiling'),
+                sac.StepsItem(title='Chat'),
+                sac.StepsItem(title='Feedback', disabled=disable_feedback),
+            ], index=1, key="wiz2"
+        )
 
     next_columns = st.columns([4,1])
     if disable_feedback:
