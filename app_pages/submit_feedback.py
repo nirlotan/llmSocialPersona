@@ -48,6 +48,10 @@ ref = db.reference("/survey_results")  # This is where survey results will be st
 # Display the button with streamlit_shadcn_ui
 if not st.session_state.button_clicked:
     if ui.button("Submit Survey", key='but'):
+
+        if 'user_description' not in st.session_state:
+            st.session_state['user_description'] = None
+
         # Each survey response will be stored under a unique key (such as a timestamp or unique user ID)
         survey_data = {
             "profile":st.session_state['user_description'],
