@@ -127,6 +127,8 @@ with bottom():
                 sac.StepsItem(title='Feedback', disabled=disable_feedback),
             ], index=1, key="wiz2"
         )
+    else:
+        wizard_step2 = 'Chat'
 
     next_columns = st.columns([4,1])
     if disable_feedback:
