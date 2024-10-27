@@ -12,3 +12,4 @@ pyyaml
 ua-parser
 user-agents
 st_pages
+firebase-admin
